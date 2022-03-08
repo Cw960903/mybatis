@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    测试 增删改
+    增删改默认结果类型为影响函数
+-->
+<mapper namespace="com.yjxxt.mappers.DeptMapper">
+   <!--查询-->
+    <select id="queryAll" resultType="Dept">
+        select * from dept
+    </select>
+    <!--insert-->
+    <insert id="addDept">
+        insert into dept values(88,'haha','shanghai')
+    </insert>
+
+    <delete id="deleteDept" parameterType="int">
+        delete from dept where deptno = #{0}
+    </delete>
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    入参类型 parameterType:
+        基本数据类型|包装类 String  Date  JAVABEAN 数组  List   Map
+        JAVABEAN : 当sql需要的参数存在多个,并且为一个对象的不同属性,可以先把对个参数封装成javabean对象,然后作为一个入参传递
+                   sql中占位符的名字需要匹配入参对象的属性名
+
+-->
+<mapper namespace="com.yjxxt.mappers.EmpMapper">
+    <!--基本数据类型|包装类: 根据部门编号查询-->
+    <select id="queryEmpByDeptno" parameterType="int" resultType="Emp">
+        select * from emp where deptno = #{deptno}
+    </select>
+
+    <!--String: 根据员工姓名查询-->
+    <select id="queryEmpByName" parameterType="String" resultType="Emp">
+        select * from emp where ename = #{ename}
+    </select>
+
+    <!--Date: 根据员工入职日期查询-->
+    <select id="queryEmpByDate" parameterType="date" resultType="Emp">
+        select * from emp where hiredate = #{hiredate}
+    </select>
+
+    <!--JAVABEAN: 根据员工姓名与部门编号同时查询-->
+    <select id="queryEmpByNameDeptno" parameterType="emp" resultType="Emp">
+        select * from emp where ename=#{ename} and deptno = #{deptno}
+    </select>
+
+    <!--数组: 根据多个员工编号查询-->
+    <select id="queryEmpByidSome" resultType="Emp">
+        select * from emp where empno in (
+            <foreach collection="array" item="item" separator=",">
+                #{item}
+            </foreach>
+        )
+    </select>
+
+    <!--Map: 根据员工薪资或者员工所在部门编号查询-->
+    <select id="queryEmpBySalDeptno" parameterType="map" resultType="Emp">
+       select * from emp where sal>#{sal} or deptno=#{deptno}
+    </select>
+</mapper>

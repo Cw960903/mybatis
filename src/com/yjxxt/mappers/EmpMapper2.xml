@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    结果类型 resultType : 查询到的结果集中的每一个数据的类型
+        基本数据类型|包装类 String  Date  JAVABEAN  List  Map  List<Map>
+        如果结果类型为List,resultType设置的为集合的泛型类型
+-->
+<mapper namespace="com.yjxxt.mappers.EmpMapper2">
+    <!--基本数据类型|包装类 : 根据员工姓名模糊查询员工编号-->
+    <select id="queryIdByNameLike" parameterType="String" resultType="int">
+        select empno from emp where ename like '%'||#{ename}||'%'
+    </select>
+
+    <!--Date : 根据员工编号查询员工入职日期-->
+    <select id="queryDateById" parameterType="int" resultType="Date">
+        select hiredate from emp where empno = #{empno}
+    </select>
+
+    <!--Map : 根据员工编号查询员工信息 -->
+    <!--查询到一条数据,返回一个Map,一条数据的不同字段值作为Map集合中的不同键值对-->
+    <select id="queryMapById" parameterType="int" resultType="Map">
+        select * from emp where empno = #{empno}
+    </select>
+
+    <!--List<Map> : 根据薪资查询员工信息-->
+    <select id="queryMapBySal" parameterType="map" resultType="Map">
+        select empno,ename,sal,comm,deptno  from emp where sal between #{low} and #{high}
+    </select>
+</mapper>
