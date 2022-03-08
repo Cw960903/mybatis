@@ -7,7 +7,10 @@
         基本数据类型|包装类 String  Date  JAVABEAN 数组  List   Map
         JAVABEAN : 当sql需要的参数存在多个,并且为一个对象的不同属性,可以先把对个参数封装成javabean对象,然后作为一个入参传递
                    sql中占位符的名字需要匹配入参对象的属性名
-
+        数组|list ：sql需要的多个参数是同种类型，一个字段的多个值，适合使用数组|list
+              sql语句中需要使用foreach标签进行遍历
+        Map : sql需要的多个参数,不属于一个对象的不不同属性值,可以封装为Map集合中的不同键值对
+              sql中占位符的名字需要匹配键值对的key
 -->
 <mapper namespace="com.yjxxt.mappers.EmpMapper">
     <!--基本数据类型|包装类: 根据部门编号查询-->
